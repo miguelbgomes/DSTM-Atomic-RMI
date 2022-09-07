@@ -1,2 +1,2 @@
-# DSTM-Atomic-RMI
-DSTM (https://github.com/ardubois/DSTM) + Atomic RMI Port
+# DSTM-AtomicRMI
+DSTM (https://github.com/ardubois/DSTM) + AtomicRMI
