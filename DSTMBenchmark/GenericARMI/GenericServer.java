@@ -16,14 +16,12 @@ public class GenericServer {
 		int numberObj = Integer.parseInt(args[1]);
 
 		IObject[] objects = new IObject[numberObj];
-		//System.out.println("N obj: "+numberObj);
 
 		for (int i = 0; i < objects.length; i++) {
 			objects[i] = new SObject(1000);
 		}
 
 		ServerApp server = new ServerApp();
-		//System.out.println("Iniciando servidor");
 		server.publiciseObjectsAndWait(id, objects);
 		System.exit(0);
 	}

@@ -117,7 +117,6 @@ class GenericTransaction implements ExecTransaction {
 		for(int i = 0; i < robjects.length; i++) {
 			reg = LocateRegistry.getRegistry("localhost", objects[i].getPort());
 			robjects[i]= (IObject) reg.lookup(objects[i].getAddress());
-			//System.out.println("Objeto "+i+" de "+robjects.length+": "+robjects[i]);
 		}
 		
 		// transaction header here!!

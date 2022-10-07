@@ -1,81 +1,74 @@
 #!/bin/bash
 
+#./runShow NSERVER NOBJSERVER NCLIENT WRITES NTTRANS NOBJTRANS
 #NSERVER = numero de servidores
-#NCLIENT = numero de clientes
-#NTTRANS = numero total de transacoes (vai ser dividido pelos clientes em NTRANS)
-#WRITES = % de transacoes write
-#NOBJTRANS = numero de objetos acessados por transacao
 #NOBJSERVER = numero de objetos criados por cada servidor
+#NCLIENT = numero de clientes
+#WRITES = % de writes por transacao
+#NTTRANS = numero total de transacoes (vai ser dividido pelos clientes em NTRANS)
+#NOBJTRANS = numero de objetos acessados por transacao
 
 if [ -z $1 ]
 then
-	NSERVER=3
+	NSERVER=2
 else
 	NSERVER=$1
 fi
 
 if [ -z $2 ]
 then
-	NTTRANS=5000
+	NOBJSERVER=500
 else
-	NTTRANS=$2
+	NOBJSERVER=$2
 fi
 
 if [ -z $3 ]
 then
-	NOBJTRANS=5
+	NCLIENT=2
 else
-	NOBJTRANS=$3
+	NCLIENT=$3
 fi
 
 if [ -z $4 ]
 then
-	NOBJSERVER=500
+	WRITES=20
 else
-	NOBJSERVER=$4
+	WRITES=$4
 fi
 
 if [ -z $5 ]
 then
-	WRITES=20
+	NTTRANS=5000
 else
-	WRITES=$5
+	NTTRANS=$5
+fi
+
+if [ -z $6 ]
+then
+	NOBJTRANS=5
+else
+	NOBJTRANS=$6
 fi
 #=$(expr $5 - 1)
 #fi
 
-
+echo "$1 $2 $3 $4 $5 $6"
+echo "$NSERVER $NOBJSERVER $NCLIENT $WRITES $NTTRANS $NOBJTRANS"
 echo "NOBJSERVER: $NOBJSERVER WRITES: $WRITES NOBJTRANS: $NOBJTRANS"
 ./compileTRMIPolite.sh
-for NCLIENT in 3;
-do
 NTRANS=$(($NTTRANS/$NCLIENT))
-#echo "clients: $NCLIENT transacoes por client: $NTRANS, NTTRANS: $NTTRANS"
 ./runTRMIPolite.sh $NSERVER $NOBJSERVER $NCLIENT $WRITES $NTRANS $NOBJTRANS
-done 
 
 ./compileTRMIPassive.sh
-for NCLIENT in 3;
-do
 NTRANS=$(($NTTRANS/$NCLIENT))
-#echo "clients: $NCLIENT transacoes por client: $NTRANS, NTTRANS: $NTTRANS"
 ./runTRMIPassive.sh $NSERVER $NOBJSERVER $NCLIENT $WRITES $NTRANS $NOBJTRANS 
-done
 
 
 ./compileLocks.sh
-for NCLIENT in 3;
-do
 NTRANS=$(($NTTRANS/$NCLIENT))
-#echo "clients: $NCLIENT transacoes por client: $NTRANS, NTTRANS: $NTTRANS"
-./runLocks.sh $NSERVER $NOBJSERVER $NCLIENT $WRITES $NTRANS $NOBJTRANS 
-done 
+./runLocks.sh $NSERVER $NOBJSERVER $NCLIENT $WRITES $NTRANS $NOBJTRANS  
 
 ./compileARMI.sh
-for NCLIENT in 3;
-do
 NTRANS=$(($NTTRANS/$NCLIENT))
-#echo "clients: $NCLIENT transacoes por client: $NTRANS, NTTRANS: $NTTRANS"
-./runARMI.sh $NSERVER $NOBJSERVER $NCLIENT $WRITES $NTRANS $NOBJTRANS 
-done 
+./runARMI.sh $NSERVER $NOBJSERVER $NCLIENT $WRITES $NTRANS $NOBJTRANS  
 

@@ -53,7 +53,7 @@ do
   printf "AtomicRMI Port\t$NCLIENT\t\n"
   for i in $(seq 0 $(($NSERVER - 1)));
   do
-	taskset -c $(($NCLIENT-$i)) java -classpath ".;./DSTMBenchmark/GenericARMI/atomicrmi-3opt.jar;./DSTMBenchmark/GenericARMI/cglib-nodep-2.2.jar" DSTMBenchmark.GenericARMI.GenericServer $i $NOBJSERVER &
+	taskset -c $i java -classpath ".;./DSTMBenchmark/GenericARMI/atomicrmi-3opt.jar;./DSTMBenchmark/GenericARMI/cglib-nodep-2.2.jar" DSTMBenchmark.GenericARMI.GenericServer $i $NOBJSERVER &
 	#printf "taskset -c $(($NCLIENT-$i)) java -classpath 'etc' DSTMBenchmark.GenericARMI.GenericServer $i $NOBJSERVER &\n"
   done
 

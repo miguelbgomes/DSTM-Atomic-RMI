@@ -52,7 +52,7 @@ do
   printf "Locks\t$NCLIENT\t"
   for i in $(seq 0 $(($NSERVER - 1)));
   do
-	taskset -c $(($NCLIENT-$i)) java DSTMBenchmark.GenericLocks.GenericServer $i $NOBJSERVER &
+	taskset -c $i java DSTMBenchmark.GenericLocks.GenericServer $i $NOBJSERVER &
   done
 
   for i in $(seq 0 $(($NCLIENT-1)));

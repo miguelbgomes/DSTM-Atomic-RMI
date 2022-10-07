@@ -53,7 +53,7 @@ do
   printf "TRMIPassive\t$NCLIENT\t"
   for i in $(seq 0 $(($NSERVER - 1)));
   do
-	taskset -c $(($NCLIENT-$i)) java -classpath ".;./TRMIPassive" DSTMBenchmark.GenericDSTM.GenericServer $i $NOBJSERVER &
+	taskset -c $i java -classpath ".;./TRMIPassive" DSTMBenchmark.GenericDSTM.GenericServer $i $NOBJSERVER &
 	#printf "taskset -c $(($NCLIENT-$i)) java -classpath .:./TRMIPassive DSTMBenchmark.GenericDSTM.GenericServer $i $NOBJSERVER &\n"
   done
 
