@@ -1,5 +1,5 @@
 # DSTM-Atomic-RMI
-DSTM (https://github.com/ardubois/DSTM) + Atomic RMI port
+DSTM (https://github.com/ardubois/DSTM) + including new Atomic RMI version
 
 To run all benchmarks, use the following command:
 
@@ -22,11 +22,11 @@ and
 
 `./runX.sh [NSERVERS] [NOBJSERVER] [NCLIENTS] [WRITES] [NTTRANS] [NOBJTRANS]`
 
-Where the parameters are the same as above, and X can be replaced with:
+Where the parameters are the same as the ones used for ./runShow above, and X can be replaced with:
 
-TRMIPassive = TRMI with Passive contention manager    
+TRMIPassive = TRMI with passive contention manager    
 TRMIPolite = TRMI with polite contention manager    
 Locks = Version using only locks    
-ARMI = Atomic RMI Port
+ARMI = Atomic RMI version
 
 Please note that the scripts may not support newer Java versions. Scripts were ran using JRE version 13.0.2.
